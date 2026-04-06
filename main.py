@@ -46,6 +46,17 @@ from app.zephyr.client import (
     update_label_uploaded_to_zephyr,
     upload_scenarios_to_zephyr,
 )
+import logging
+
+# Write logs to file so dashboard can read them
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(message)s",
+    handlers=[
+        logging.StreamHandler(),           # console
+        logging.FileHandler("app.log"),    # file
+    ]
+)
 
 app = FastAPI(title="JIRA AI Analysis Service", version="3.0.0")
 
@@ -394,15 +405,14 @@ async def api_stats():
 @app.get("/api/logs")
 async def api_logs():
     try:
-        result = subprocess.run(
-            ["docker", "logs", "--tail", "80", "jira-ai-service"],
-            capture_output=True, text=True
-        )
-        lines = (result.stdout + result.stderr).splitlines()
-        return {"logs": lines[-80:]}
-    except Exception:
-        return {"logs": ["Log retrieval not available in this environment."]}
-
+        log_file = Path("app.log")
+        if log_file.exists():
+            with open(log_file, "r") as f:
+                lines = f.readlines()
+            return {"logs": [l.rstrip() for l in lines[-80:]]}
+        return {"logs": ["No logs available yet."]}
+    except Exception as e:
+        return {"logs": [f"Error reading logs: {str(e)}"]}
 
 # ── Dashboard Page ────────────────────────────────────────────────────────────
 
