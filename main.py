@@ -542,7 +542,7 @@ async def dashboard():
 <div class="header">
   <div>
     <h1>🤖 JIRA AI Analysis Service</h1>
-    <p>Real-time story analysis dashboard — visible to the whole team</p>
+    <p>Real-time story analysis dashboard</p>
   </div>
   <div class="live-badge">
     <div class="pulse"></div>
