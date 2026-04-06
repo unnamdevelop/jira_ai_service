@@ -41,5 +41,6 @@ jobs:
               --env-file ~/jira_ai_service/.env \
               -p 8000:8000 \
               --restart always \
+              -v ~/jira_ai_service/data:/app/data \
               ${{ secrets.DOCKER_USERNAME }}/jira-ai-service:latest
             echo "Deployment complete!"
