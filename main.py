@@ -512,7 +512,7 @@ async function loadAll() {
   document.getElementById('last-refresh').textContent = 'Last refreshed: ' + new Date().toLocaleTimeString();
 }
 loadAll();
-setInterval(loadAll, 10000);
+setInterval(loadAll, 1000);
 </script>
 </body>
 </html>""")
