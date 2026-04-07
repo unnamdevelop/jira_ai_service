@@ -197,6 +197,8 @@ async def receive_jira_webhook(request: Request):
             else post_comment(key, jira_comment)
         )
         label_added = add_jira_label(key, label)
+        remove_label(key, "ReadyForAIAnalysis")
+        logging.info(f"LABEL CLEANUP: Removed ReadyForAIAnalysis from {key}")
 
         reporter_email = get_story_reporter_email(key)
         email_sent     = False
@@ -298,6 +300,9 @@ async def upload_to_zephyr(request: Request):
         label_updated = False
         if success > 0:
             label_updated = update_label_uploaded_to_zephyr(issue_key)
+            remove_label(issue_key, "Approve-Zephyr-Upload")
+            remove_label(issue_key, "AI-Ready")
+            logging.info(f"LABEL CLEANUP: Removed Approve-Zephyr-Upload and AI-Ready from {issue_key}")
 
         email_sent = False
         if success > 0:
