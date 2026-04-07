@@ -488,7 +488,7 @@ async function loadStories() {
     const bar = `<div class="score-bar-wrap"><div class="score-bar"><div class="score-fill" style="width:${pct}%;background:${col}"></div></div><span class="score-text" style="color:${col}">${s.score}/25</span></div>`;
     const sum = s.summary ? s.summary.substring(0,35)+(s.summary.length>35?'...':'') : '—';
     const t   = s.analysed_at ? s.analysed_at.replace(' UTC','') : '—';
-    return `<tr><td><span class="story-key">${s.key}</span>${s.reanalysis?' 🔄':''}</td><td title="${s.summary}">${sum}</td><td>${sb}</td><td>${bar}</td><td>${zb}</td><td style="color:#94a3b8;font-size:11px">${t}</td></tr>`;
+    return `<tr><td><a href="https://raghav-unnam.atlassian.net/browse/${s.key}" target="_blank" style="font-family:monospace;font-weight:700;color:#2563eb;font-size:13px;text-decoration:none;">${s.key}</a>${s.reanalysis?' 🔄':''}</td><td title="${s.summary}">${sum}</td><td>${sb}</td><td>${bar}</td><td>${zb}</td><td style="color:#94a3b8;font-size:11px">${t}</td></tr>`;
   }).join('');
 }
 async function loadLogs() {
