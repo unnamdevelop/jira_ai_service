@@ -433,7 +433,7 @@ async def dashboard():
     <h1>🤖 JIRA AI Analysis Service</h1>
     <p>Real-time story analysis dashboard — accessible by the whole team</p>
   </div>
-  <div class="live-badge"><div class="pulse"></div>Live — auto refresh 1s</div>
+  <div class="live-badge"><div class="pulse"></div>Live — auto refresh 5s</div>
 </div>
 <div class="main">
   <div class="refresh-bar">
@@ -458,7 +458,7 @@ async def dashboard():
       </div>
     </div>
     <div class="card">
-      <div class="card-header">📜 Live Logs <span>last 80 lines — auto refresh 1s</span></div>
+      <div class="card-header">📜 Live Logs <span>last 80 lines — auto refresh 5s</span></div>
       <div class="log-box" id="log-box">Loading logs...</div>
     </div>
   </div>
@@ -512,7 +512,7 @@ async function loadAll() {
   document.getElementById('last-refresh').textContent = 'Last refreshed: ' + new Date().toLocaleTimeString();
 }
 loadAll();
-setInterval(loadAll, 1000);
+setInterval(loadAll, 5000);
 </script>
 </body>
 </html>""")
